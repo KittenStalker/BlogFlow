@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils import timezone
-
-from .user import User
+from django.contrib.auth.models import User
 
 class Post(models.Model):
     STATUS_CHOICES = (('Draft', 'draft'), ('Published', 'published'))
@@ -14,9 +13,6 @@ class Post(models.Model):
     title = models.TextField(max_length=100, blank=True)
     description = models.TextField(max_length=500, blank=True)
     content = models.TextField(blank=True)
-
-    def __str__(self):
-        return self.title
 
     def increment_views(self):
         self.views += 1

@@ -1,33 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
-posts = [
-    {
-        'author': 'Админ',
-        'title': 'Это первый пост',
-        'description': 'Описание',
-        'content': 'Содержание первого поста.',
-        'date_posted': '12 мая, 2022',
-        'views': '123',
-    },
-    {
-        'author': 'Админ',
-        'title': 'Это первый пост',
-        'description': 'Описание',
-        'content': 'Содержание первого поста.',
-        'date_posted': '12 мая, 2022',
-        'views': '123',
-    },
-]
+from .models import Post
 
 def home(request):
     context = {
-        'posts': posts
+        'posts': Post.objects.all()
     }
     return render(request, 'home.html', context)
 
 def about(request):
-    return HttpResponse('<h1>Наш клуб</h1>')
+    return render(request, 'about.html')
 
 def user(request, username):
     return HttpResponse(f"By {username}")

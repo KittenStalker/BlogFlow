@@ -1,3 +1,3 @@
 from .post import Post
-from .user import User
+from .newuser import NewUser
 from .comment import Comment
