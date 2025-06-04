@@ -1,34 +1,51 @@
-<!DOCTYPE html>
+{% load static %}
 <html>
 	<head>
 		<meta charset="utf-8" />
 		<title>Main page</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap, иконки и шрифт -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+<!--         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+         <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900' rel='stylesheet' type='text/css'>
+         <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+         <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 	</head>
 
 	<body>
-
     <nav class="navbar navbar-expand-md navbar-dark bg-blue fixed-top">
         <div class="collapse navbar-collapse" id="navbarToggle">
                 <!-- Левая часть навигационной панели -->
                 <div class="navbar-nav" style="float: left;">
                     <a class="nav-item nav-link" href="{% url 'blog-home' %}">Главная</a>
                     <a class="nav-item nav-link" href="{% url 'blog-about' %}">О сайте</a>
+
+                    <form method="post" action="{% url 'blog-home' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success">Сделать пост</button>
+                        </form>
                 </div>
-                <!-- Центр часть навигационной панели -->
-                <div style="text-align: center;">
-                    <a class="nav-item nav-link" href="{% url 'blog-home' %}">Сделать пост</a>
-                </div>
+<!--                &lt;!&ndash; Центр часть навигационной панели &ndash;&gt;-->
+<!--                <div style="text-align: center;">-->
+
+<!--                </div>-->
                 <!-- Правая часть навигационной панели -->
-                <div class="navbar-nav" style="float: right;">
+                <div class="navbar-nav" style="float: right; display:inline;">
                     {% if user.is_authenticated %}
-                        <a class="nav-item nav-link" href="{% url 'profile' %}">Профиль</a>
+                        <form method="post" action="{% url 'profile' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success">Профиль</button>
+                        </form>
+
                         <form method="post" action="{% url 'logout' %}">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-success">Выход</button>
+                            <button>Выход</button>
                         </form>
+
           	        {% else %}
                         <a class="nav-item nav-link" href="{% url 'login' %}">Вход</a>
                         <a class="nav-item nav-link" href="{% url 'register' %}">Регистрация</a>
@@ -47,7 +64,7 @@
                 {% if messages %}
                     {% for message in messages %}
                     <div class="alert alert-{{ message.tags }}">
-                    {{ message }}
+                        {{ message }}
                     </div>
                     {% endfor %}
                 {% endif %}
