@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>Main page</title>
+		<title>BlogFlow</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Bootstrap, иконки и шрифт -->
@@ -16,7 +16,7 @@
          <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 	</head>
 
-	<body>
+	<body style="background-color: #f2eef4">
     <nav class="navbar navbar-expand-md bg-blue fixed-top">
         <div class="collapse navbar-collapse" id="navbarToggle">
                 <!-- Левая часть навигационной панели -->
@@ -28,46 +28,92 @@
                             {% csrf_token %}
                             <button type="submit" class="btn btn-outline-warning">Сделать пост</button>
                     </form>
+
+                    <form method="get" class="navbar-left">
+                        <input type="text"
+                               name="q"
+                               class="form-control"
+                               placeholder="Поиск по автору или названию"
+                               value="{{ search_query }}">
+
+                        <button type="submit" class="btn btn-outline-warning">
+                            <i class="bi bi-search">Найти</i>
+                        </button>
+
+                        {% if search_query %}
+                            <a href="?" class="btn btn-outline-danger">
+                                <i class="bi bi-x-circle">Сбросить</i>
+                            </a>
+                        {% endif %}
+                    </form>
                 </div>
+
                 <!-- Правая часть навигационной панели -->
                 <div class="navbar-nav" style="display: flex; float: right; align-items: center; gap: 0.5rem;">
                     {% if user.is_authenticated %}
 
                         <form method="post" action="{% url 'profile' %}" style="margin: 7;">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-outline-warning">Профиль</button>
+                            <button type="submit" class="btn btn-outline-success">Профиль</button>
                         </form>
 
                         <form method="post" action="{% url 'logout' %}" style="margin: 7;">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-outline-warning">Выход</button>
+                            <button type="submit" class="btn btn-outline-danger">Выход</button>
                         </form>
 
           	        {% else %}
 
-                        <a class="navig-acc" href="{% url 'login' %}">Вход</a>
-                        <a class="navig-acc" href="{% url 'register' %}">Регистрация</a>
+                        <form method="post" action="{% url 'login' %}" style="margin: 7;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-success">Вход</button>
+                        </form>
+
+                        <form method="post" action="{% url 'register' %}" style="margin: 7;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-success">Регистрация</button>
+                        </form>
 
           	        {% endif %}
                 </div>
         </div>
     </nav>
 
+<!--    <marquee direction="right">-->
+<!--        <a style="navig">ДТФ 2 ИЗ РЕАЛ!!!</a>-->
+<!--        <img src="https://media.tenor.com/k8A7cVerS1UAAAAj/touhou-fumo.gif" style="height: 150px; width: 150px;"/>-->
+<!--        <img src="https://media1.tenor.com/m/Xk-mBqoSLX0AAAAC/kaguya-boom.gif" style="height: 150px; width: 150px;"/>-->
+<!--    </marquee>-->
 
-        <div class="container">
-            <div>
-                {% block content %}
-
-                {% endblock %}
-                {% if messages %}
-                    {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }}">
-                        {{ message }}
+        <!-- Блок с постами -->
+            <div style="display: flex; gap: 20px; align-items: flex-start;">
+                <!-- Левая панель с кнопками (горизонтально) -->
+                <div class="content-section" style="flex-shrink: 0; padding: 10px;">
+                    <div style="flex-direction: column; display: flex; gap: 10px;">
+                        <p style="color: color: #FFC300;">Сортировка</p>
+                        <button style="padding: 8px 12px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Кнопка 1</button>
+                        <button style="padding: 8px 12px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Кнопка 2</button>
+                        <button style="padding: 8px 12px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Кнопка 3</button>
                     </div>
-                    {% endfor %}
-                {% endif %}
+                </div>
 
+                <!-- Центральная часть с постами -->
+                <section>
+                <div>
+                    {% block content %}
+                    {% endblock %}
+
+                    {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                </section>
             </div>
-        </div>
+
+
 	</body>
 </html>

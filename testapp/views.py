@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
@@ -7,19 +8,33 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-from .models import Post
 
-def home(request):
-    context = {
-        'posts': Post.objects.all()
-    }
-    return render(request, 'home.html', context)
+from .forms.searchform import SearchForm
+from .models import Post
 
 class PostListView(ListView):
     model = Post
     template_name = 'home.html'
     context_object_name = 'posts'
     ordering = ['-postDate']
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        search_query = self.request.GET.get('q')
+
+        if search_query:
+            return queryset.filter(
+                Q(title__icontains=search_query) |
+                Q(user__username__icontains=search_query)
+            ).distinct()
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search_query'] = self.request.GET.get('q', '')
+        return context
+
+
 
 class PostDetailView(DetailView):
     model = Post
@@ -28,6 +43,7 @@ class PostDetailView(DetailView):
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['title', 'content']
+    template_name = 'post_form.html'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -61,6 +77,5 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 def about(request):
     return render(request, 'about.html')
-
 
 

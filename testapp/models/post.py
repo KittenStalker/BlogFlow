@@ -11,7 +11,7 @@ class Post(models.Model):
     views = models.PositiveIntegerField(default=0)
     postDate = models.DateField(default=timezone.now)
 
-    title = models.CharField(max_length=100, blank=True)
+    title = models.CharField(max_length=100, null=True)
     description = models.TextField(max_length=500, blank=True)
     content = models.TextField(blank=True, max_length=5000)
 

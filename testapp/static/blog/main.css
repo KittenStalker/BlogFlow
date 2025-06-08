@@ -55,13 +55,6 @@ a.article-title:hover {
   white-space: pre-line;
 }
 
-.article-img {
-  height: 65px;
-  width: 65px;
-  margin-right: 16px;
-  margin-right: 16px;
-}
-
 .article-metadata {
   padding-bottom: 1px;
   margin-bottom: 4px;
@@ -79,6 +72,14 @@ a.article-title:hover {
   vertical-align: middle;
 }
 
+.article-img {
+  height: 65px;
+  width: 65px;
+  border-radius: 50%;
+  margin-right: 16px;
+  margin-bottom: 7px;
+}
+
 .account-img {
   height: 250px;
   width: 250px;
@@ -92,7 +93,7 @@ a.article-title:hover {
 }
 
 .navig {
-  color: #FFC300;
+  color: #6E6A6F;
   font-weight: bold;
   font-size: 25px;
 }
@@ -102,7 +103,7 @@ a.article-title:hover {
 }
 
 .navig-acc {
-  color: #FFC300;
+  color: #6C698D;
   font-weight: bold;
   font-size: 20px;
 }
@@ -111,23 +112,76 @@ a.article-title:hover {
   color: #FFFFFF;
 }
 
+.main-user {
+  color: #6C698D;
+  font-weight: bold;
+  font-size: 15px;
+}
+
 .bg-blue {
-  background-color: #f97e23
+  background-color: #BFAFA6
 }
 
 .btn-outline-warning {
-    background-color: transparent; /* Прозрачный фон */
-    border: 2px solid #FFC300;   /* Синяя рамка */
-    color: #FFFFFF;               /* Синий текст */
-    padding: 8px 16px;           /* Отступы */
-    border-radius: 4px;          /* Закругленные углы */
-    cursor: pointer;             /* Курсор-указатель */
-    transition: all 0.3s;        /* Плавные анимации */
+    background-color: transparent;
+    border: 2px solid #AA968A;
+    color: #FFFFFF;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
     font-weight: bold;
     font-size: 15px;
 }
 
 .btn-outline-warning:hover {
-    background-color: #FFC300;    /* Синий фон при наведении */
-    color: white;                /* Белый текст при наведении */
+    background-color: #AA968A;
+    color: white;
+}
+.btn-outline-danger {
+    background-color: transparent;
+    border: 2px solid #AA968A;
+    color: #FFFFFF;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dfabab;
+    color: white;
+}
+
+.btn-outline-success {
+    background-color: transparent;
+    border: 2px solid #AA968A;
+    color: #FFFFFF;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.btn-outline-success:hover {
+    background-color: #abdfb5;
+    color: white;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    width: 600px;
+    margin: 7;
+    gap: 0.8rem;
+    margin-left: 200px;
+}
+
+section {
+  height: 1000px;
+  padding: 0 150px;
 }
