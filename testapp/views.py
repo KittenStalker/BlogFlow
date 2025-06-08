@@ -9,7 +9,6 @@ from django.views.generic import (
     DeleteView
 )
 
-from .forms.searchform import SearchForm
 from .models import Post
 
 class PostListView(ListView):
@@ -33,8 +32,6 @@ class PostListView(ListView):
         context = super().get_context_data(**kwargs)
         context['search_query'] = self.request.GET.get('q', '')
         return context
-
-
 
 class PostDetailView(DetailView):
     model = Post

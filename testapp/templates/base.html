@@ -29,7 +29,7 @@
                             <button type="submit" class="btn btn-outline-warning">Сделать пост</button>
                     </form>
 
-                    <form method="get" class="navbar-left">
+                    <form method="get" class="navbar-left" action="{% url 'blog-home' %}">
                         <input type="text"
                                name="q"
                                class="form-control"
@@ -86,16 +86,17 @@
 <!--    </marquee>-->
 
         <!-- Блок с постами -->
-            <div style="display: flex; gap: 20px; align-items: flex-start;">
-                <!-- Левая панель с кнопками (горизонтально) -->
-                <div class="content-section" style="flex-shrink: 0; padding: 10px;">
-                    <div style="flex-direction: column; display: flex; gap: 10px;">
-                        <p style="color: color: #FFC300;">Сортировка</p>
-                        <button style="padding: 8px 12px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Кнопка 1</button>
-                        <button style="padding: 8px 12px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Кнопка 2</button>
-                        <button style="padding: 8px 12px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Кнопка 3</button>
-                    </div>
-                </div>
+<!--            <div style="display: flex; gap: 20px; align-items: flex-start;">-->
+<!--                &lt;!&ndash; Левая панель с кнопками (горизонтально) &ndash;&gt;-->
+
+<!--                <form class="content-section" style="flex-shrink: 0; padding: 10px;" action="{% url 'blog-home' %}">-->
+<!--                        <div style="flex-direction: column; display: flex; gap: 10px;">-->
+<!--                            <p style="color: color: #FFC300;">Сортировка</p>-->
+<!--                            <button style="padding: 8px 12px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Кнопка 1</button>-->
+<!--                            <button style="padding: 8px 12px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Кнопка 2</button>-->
+<!--                            <button style="padding: 8px 12px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Кнопка 3</button>-->
+<!--                        </div>-->
+<!--                </form>-->
 
                 <!-- Центральная часть с постами -->
                 <section>
